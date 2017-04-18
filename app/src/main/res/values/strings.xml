@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">AutoMessanger</string>
+    <string name="app_name">AutoMessenger</string>
+    <string name="picture">picture</string>
     <integer name="com_vk_sdk_AppId">5925586</integer>
 </resources>

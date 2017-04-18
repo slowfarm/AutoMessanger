@@ -7,7 +7,14 @@ import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKAccessTokenTracker;
 import com.vk.sdk.VKSdk;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import ru.eva.automessanger.Retrofit.SendMessage;
+
 public class Application extends android.app.Application {
+    private static SendMessage send;
     VKAccessTokenTracker vkAccessTokenTracker = new VKAccessTokenTracker() {
         @Override
         public void onVKAccessTokenChanged(VKAccessToken oldToken, VKAccessToken newToken) {
@@ -25,5 +32,20 @@ public class Application extends android.app.Application {
         super.onCreate();
         vkAccessTokenTracker.startTracking();
         VKSdk.initialize(this);
+        Realm.init(this);
+        RealmConfiguration realmConfiguration = new RealmConfiguration
+                .Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(realmConfiguration);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.vk.com/method/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        send = retrofit.create(SendMessage.class);
+    }
+
+    public static SendMessage getMessageId() {
+        return send;
     }
 }
