@@ -11,16 +11,16 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import ru.eva.automessanger.Retrofit.SendMessage;
+import ru.eva.automessanger.Retrofit.VKApi;
 
 public class Application extends android.app.Application {
-    private static SendMessage send;
+    private static VKApi api;
     VKAccessTokenTracker vkAccessTokenTracker = new VKAccessTokenTracker() {
         @Override
         public void onVKAccessTokenChanged(VKAccessToken oldToken, VKAccessToken newToken) {
             if (newToken == null) {
                 Toast.makeText(Application.this, "AccessToken invalidated", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(Application.this, MainActivity.class);
+                Intent intent = new Intent(Application.this, StartActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -42,10 +42,10 @@ public class Application extends android.app.Application {
                 .baseUrl("https://api.vk.com/method/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        send = retrofit.create(SendMessage.class);
+        api = retrofit.create(VKApi.class);
     }
 
-    public static SendMessage getMessageId() {
-        return send;
+    public static VKApi getApi() {
+        return api;
     }
 }

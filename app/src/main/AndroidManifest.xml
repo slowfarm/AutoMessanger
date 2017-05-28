@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".Application">
-        <activity android:name=".MainActivity" >
+        <activity android:name=".StartActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,7 +24,7 @@
             android:label="ServiceActivity"
             android:theme="@style/VK.Transparent" />
 
-        <activity android:name=".StartActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".ApiCallActivity" />
     </application>
 

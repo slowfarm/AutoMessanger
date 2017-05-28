@@ -11,15 +11,15 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import ru.eva.automessanger.Models.Girls;
+import ru.eva.automessanger.Models.Girl;
 import ru.eva.automessanger.R;
 
 
-class MainFragmentAdapter extends RecyclerView.Adapter<MainFragmentAdapter.ViewHolder> {
+public class MainFragmentAdapter extends RecyclerView.Adapter<MainFragmentAdapter.ViewHolder> {
 
-    private List<Girls> text;
+    private List<Girl> text;
 
-    MainFragmentAdapter(List<Girls> text) {
+    public MainFragmentAdapter(List<Girl> text) {
         this.text = text;
     }
 
@@ -31,7 +31,7 @@ class MainFragmentAdapter extends RecyclerView.Adapter<MainFragmentAdapter.ViewH
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        viewHolder.mTextView.setText(text.get(i).getFirst_name() + " " + text.get(i).getLast_name());
+        viewHolder.mTextView.setText(text.get(i).getFirstName() + " " + text.get(i).getLastName());
         Picasso.with(viewHolder.itemView.getContext())
                 .load(text.get(i).getPhoto())
                 .into(viewHolder.mImageView);
